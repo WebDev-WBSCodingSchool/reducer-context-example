@@ -1,4 +1,5 @@
 import { useCart } from '@/context';
+import { formatCurrency } from '@/utils';
 
 const products = [
   { id: 1, name: 'Product 1', price: 29.99 },
@@ -45,7 +46,7 @@ const ShoppingCart = () => {
             {products.map(product => (
               <li key={product.id} className='flex justify-between items-center p-2'>
                 <span>{product.name}</span>
-                <span>${product.price}</span>
+                <span>{formatCurrency(product.price)}</span>
                 <button
                   className='bg-blue-500 text-white px-3 py-1 rounded ml-4'
                   onClick={() => addToCart(product)}
@@ -62,7 +63,7 @@ const ShoppingCart = () => {
                 <li key={item.id} className='flex justify-between items-center p-2'>
                   <span>{item.name}</span>
                   <span>
-                    ${item.price} x {item.quantity}
+                    {formatCurrency(item.price)} x {item.quantity}
                   </span>
                   <button
                     className='bg-red-500 text-white px-3 py-1 rounded ml-4'
@@ -85,4 +86,4 @@ const ShoppingCart = () => {
   );
 };
 
-export default ShoppingCart;
+export { ShoppingCart };

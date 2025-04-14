@@ -1,20 +1,14 @@
-import { useReducer } from 'react';
-import { CartContext } from '.';
+import { createContext, use, useReducer } from 'react';
+import { formatCurrency } from '@/utils';
 
-const formatCurrency = amount =>
-  new Intl.NumberFormat('de-DE', {
-    style: 'currency',
-    currency: 'EUR'
-  }).format(amount);
+const CartContext = createContext();
 
-const initialState = {
-  user: 'Anoj',
-  items: [],
-  total: new Intl.NumberFormat('de-DE', {
-    style: 'currency',
-    currency: 'EUR'
-  }).format(0),
-  itemCount: 0
+const useCart = () => {
+  const context = use(CartContext);
+  if (!context) {
+    throw new Error('useCart must be used within a CartContextProvider');
+  }
+  return context;
 };
 
 const cartReducer = (state, action) => {
@@ -75,9 +69,16 @@ const cartReducer = (state, action) => {
   }
 };
 
-const CartProvider = ({ children }) => {
+const CartContextProvider = ({ children }) => {
+  const initialState = {
+    user: 'Anoj',
+    items: [],
+    total: formatCurrency(0),
+    itemCount: 0
+  };
   const [cart, dispatch] = useReducer(cartReducer, initialState);
   return <CartContext.Provider value={{ cart, dispatch }}>{children}</CartContext.Provider>;
 };
 
-export default CartProvider;
+// eslint-disable-next-line
+export { CartContextProvider, useCart };
