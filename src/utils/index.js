@@ -1,3 +1,1 @@
-import { formatCurrency } from './formatCurrency';
-
-export { formatCurrency };
+export { default as formatCurrency } from './formatCurrency';

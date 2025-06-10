@@ -4,4 +4,4 @@ const formatCurrency = amount =>
     currency: 'EUR'
   }).format(amount);
 
-export { formatCurrency };
+export default formatCurrency;

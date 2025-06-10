@@ -1,10 +1,10 @@
-import { CartContextProvider } from '@/context';
+import { CartState } from '@/context';
 import { ShoppingCart } from '@/components';
 
 const App = () => (
-  <CartContextProvider>
+  <CartState>
     <ShoppingCart />
-  </CartContextProvider>
+  </CartState>
 );
 
 export default App;
